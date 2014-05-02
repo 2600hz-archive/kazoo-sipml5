@@ -33,6 +33,7 @@ function tsip_transport(e_type, o_stack, s_host, i_port, s_description, fn_callb
                 this.b_reliable = true;
                 this.s_scheme = "sip";
                 this.s_protocol = "ws";
+                this.s_transport = "ws";
                 this.s_via_protocol = "WS";
                 this.s_service = "SIP+D2W";
                 this.o_ws = null;
@@ -47,6 +48,7 @@ function tsip_transport(e_type, o_stack, s_host, i_port, s_description, fn_callb
                 this.b_reliable = true;
                 this.s_scheme = "sips";
                 this.s_protocol = "wss";
+                this.s_transport = "ws";
                 this.s_via_protocol = "WSS";
                 this.s_service = "SIPS+D2W";
                 this.o_ws = null;
@@ -67,6 +69,7 @@ function tsip_transport(e_type, o_stack, s_host, i_port, s_description, fn_callb
                 this.b_reliable = false;
                 this.s_scheme = "sip";
                 this.s_protocol = "udp";
+                this.s_transport = "udp";
                 this.s_via_protocol = "UDP";
                 this.s_service = "SIP+D2U";
                 this.o_transport = null;
@@ -156,7 +159,7 @@ tsip_transport.prototype.get_uri = function(b_lr){
 		b_ipv6 ? "]" : "",
 		this.o_stack.network.aor.i_port,
 		b_lr ? "lr" : "",
-		this.s_protocol);
+		this.s_transport);
 	    
     var o_uri = tsip_uri.prototype.Parse(s_uristring);
     if(o_uri){
@@ -298,7 +301,7 @@ tsip_transport.prototype.message_update_aor = function(o_message){
         o_message.o_hdr_Contact.o_uri.s_scheme = this.s_scheme;
         o_message.o_hdr_Contact.o_uri.s_host = this.o_stack.network.aor.s_ip;
         o_message.o_hdr_Contact.o_uri.i_port = this.o_stack.network.aor.i_port;
-		tsk_params_add(o_message.o_hdr_Contact.o_uri.ao_params, "transport", this.s_protocol);
+		tsk_params_add(o_message.o_hdr_Contact.o_uri.ao_params, "transport", this.s_transport);
 	}
 
 	return 0;

@@ -826,7 +826,7 @@ tsip_stack.prototype.__get_proxy_outbound_uri_string = function () {
             case tsip_transport_type_e.SCTP: s_tansport= "sctp"; break;
             case tsip_transport_type_e.DTLS: s_tansport= "dtls"; break;
             case tsip_transport_type_e.WS: s_tansport= "ws"; break;
-            case tsip_transport_type_e.WSS: s_tansport= "wss"; break;
+            case tsip_transport_type_e.WSS: s_tansport= "ws"; break;
             case tsip_transport_type_e.UDP: default: s_tansport= "udp"; break;
         }
         return tsk_string_format("<sip:{0}:{1};lr;sipml5-outbound;transport={2}>", this.network.s_proxy_outbound_host, this.network.i_proxy_outbound_port, s_tansport);
